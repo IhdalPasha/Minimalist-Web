@@ -1,37 +1,47 @@
-const menuToggle = document.getElementById('mobile-menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu-container');
-const overlay = document.getElementById('mobile-overlay');
-
-let scrollPosition = 0;
+/* ================= MOBILE MENU ================= */
+const toggle = document.getElementById("mobile-menu-toggle");
+const overlay = document.getElementById("mobile-menu-overlay");
+const menu = document.getElementById("mobile-menu");
+const html = document.documentElement;
 
 function toggleMenu() {
+    const isActive = menu.classList.toggle("active");
+    overlay.classList.toggle("active");
+    toggle.classList.toggle("active");
 
-  const isActive = mobileMenu.classList.contains('active');
-
-  if (!isActive) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = '';
-  }
-
-  menuToggle.classList.toggle('active');
-  mobileMenu.classList.toggle('active');
-  overlay.classList.toggle('active');
+    if (isActive) {
+        // Gunakan "hidden", bukan "none"
+        html.style.overflow = "hidden";
+        // Tambahkan ini agar halaman tidak bergeser ke kanan saat scrollbar hilang
+        html.style.paddingRight = (window.innerWidth - html.clientWidth) + "px";
+    } else {
+        html.style.overflow = "";
+        html.style.paddingRight = "";
+    }
 }
 
-const reveals = document.querySelectorAll('.reveal');
+toggle.addEventListener("click", toggleMenu);
+overlay.addEventListener("click", toggleMenu);
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-        }
+// Tutup menu jika link diklik (opsional tapi disarankan)
+document.querySelectorAll(".mobile-menu-item").forEach(link => {
+    link.addEventListener("click", () => {
+        if(menu.classList.contains("active")) toggleMenu();
     });
-}, {
-    threshold: 0.2
 });
 
-reveals.forEach(reveal => {
-    observer.observe(reveal);
-});
+/* ================= CARD IMAGE ANIMATION ================= */
+const animatedImages = document.querySelectorAll(".animated-img");
 
+const imageObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+        });
+    },
+    { threshold: 0.1 } // Turunkan threshold agar lebih sensitif di mobile
+);
+
+animatedImages.forEach(img => imageObserver.observe(img));
