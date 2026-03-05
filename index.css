@@ -896,6 +896,7 @@
   .about-container {
     max-width: 900px;
     margin: 0 auto;
+    min-height: auto;
     padding: 40px;
     text-align: left; /* Biar lebih enak dibaca narasinga */
   }
@@ -903,13 +904,15 @@
   .about-text h2 {
       font-size: 2.5rem;
       margin-bottom: 20px;
+      color: var(--base-color);
+      white-space: nowrap ;
   }
 
   .about-text .highlight {
-      font-size: 1.2rem;
-      color: #fce66d; /* Warna aksen emas/kuning agar menonjol */
+      font-size: clamp(0.4rem, 5vw, 1.2rem);
+      color: #fce76df8; /* Warna aksen emas/kuning agar menonjol */
       margin-bottom: 15px;
-      font-weight: 700;
+      font-weight: 600;
   }
 
   .about-text p {
@@ -930,12 +933,17 @@
       background: rgba(255, 255, 255, 0.1);
       padding: 8px 15px;
       border-radius: 50px;
-      font-size: 0.8rem;
+      font-size: clamp(0.4rem, 5vw, 0.8rem);
       border: 1px solid rgba(255, 255, 255, 0.2);
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       gap: 8px;
+      white-space: nowrap;
   }
+
+    .nospace{
+      white-space: nowrap;
+    }
 
   .about-features i {
       color: #00ff88; /* Warna hijau sukses untuk check-mark */
