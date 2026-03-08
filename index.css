@@ -376,9 +376,6 @@
   .nav-space{
     display: flex;
   }
-  nav .container-content{
-    display: 
-  }
 
   nav .container-content a{
     font-size: var(--font-heading-2-size);
